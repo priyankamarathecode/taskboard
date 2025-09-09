@@ -1,0 +1,11 @@
+# Global ignores
+node_modules/
+.env
+
+# Ignore node_modules and .env inside frontend/
+frontend/node_modules/
+frontend/.env
+
+# Ignore node_modules and .env inside backend/
+backend/node_modules/
+backend/.env
