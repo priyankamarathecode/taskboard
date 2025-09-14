@@ -16,7 +16,19 @@ const UserProfile = () => {
   const handleUpdate = async () => {
     try {
       await API.put("/profile", user);
-      toast.success("Profile updated");
+
+      // ✅ Update localStorage after successful update
+      const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+      storedUser.name = user.name;
+      localStorage.setItem("user", JSON.stringify(storedUser));
+
+      // ✅ Dispatch event so sidebar can re-render
+      window.dispatchEvent(new Event("userNameUpdated"));
+
+      toast.success("Profile updated successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch {
       toast.error("Failed to update");
     }
