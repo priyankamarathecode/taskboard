@@ -38,7 +38,8 @@ const UserProfile = () => {
           value={user.email}
           onChange={handleChange}
           placeholder="Email"
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded bg-gray-300"
+          readOnly
         />
         <button
           onClick={handleUpdate}

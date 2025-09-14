@@ -16,6 +16,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/tasks", require("./routes/taskRoutes"));
 app.use("/api/dashboard", require("./routes/dashboardRoutes"));
+app.use("/api/profile", require("./routes/profileRoutes"));
 
 const path = require("path");
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
