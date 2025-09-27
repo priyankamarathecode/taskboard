@@ -16,7 +16,7 @@ const authMiddleware = async (req, res, next) => {
       return res.status(401).json({ message: "Invalid token" });
     }
 
-    req.user = user; // ✅ This must be set
+    req.user = user; //  This must be set
     next();
   } catch (err) {
     console.error("Auth error:", err.message);

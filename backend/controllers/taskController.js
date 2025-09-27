@@ -17,7 +17,6 @@ exports.assignTask = async (req, res) => {
 
     res.status(201).json(task);
   } catch (err) {
-    console.error("Assign Task Error:", err.message);
     res.status(500).json({ message: "Task creation failed" });
   }
 };
@@ -48,7 +47,6 @@ exports.updateTask = async (req, res) => {
 
     res.json({ message: "Task updated", updatedTask });
   } catch (err) {
-    console.error("Update Task Error:", err.message);
     res.status(500).json({ error: "Failed to update task" });
   }
 };
@@ -70,21 +68,9 @@ exports.deleteTask = async (req, res) => {
 
     res.json({ message: "Task deleted" });
   } catch (err) {
-    console.error("Delete Task Error:", err.message);
     res.status(500).json({ error: "Failed to delete task" });
   }
 };
-
-// Get My Tasks (for logged-in user)
-/* exports.getMyTasks = async (req, res) => {
-  try {
-    const tasks = await Task.find({ assignedTo: req.user._id });
-    res.json(tasks);
-  } catch (err) {
-    console.error("Get My Tasks Error:", err.message);
-    res.status(500).json({ message: "Failed to fetch tasks" });
-  }
-}; */
 
 exports.getMyTasks = async (req, res) => {
   try {
@@ -100,7 +86,6 @@ exports.getMyTasks = async (req, res) => {
 
     res.json(tasks);
   } catch (err) {
-    console.error("Get My Tasks Error:", err.message);
     res.status(500).json({ message: "Failed to fetch tasks" });
   }
 };
@@ -124,7 +109,6 @@ exports.updateTask = async (req, res) => {
     await task.save();
     res.json({ message: "Task updated successfully", task });
   } catch (error) {
-    console.error("Update error:", error);
     res.status(500).json({ message: "Error updating task" });
   }
 };
@@ -132,7 +116,6 @@ exports.updateTask = async (req, res) => {
 exports.uploadAttachment = async (req, res) => {
   try {
     const taskId = req.params.taskId;
-    console.log("UPLOAD HIT for task:", taskId);
 
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded" });
@@ -154,7 +137,6 @@ exports.uploadAttachment = async (req, res) => {
 
     res.json({ message: "Attachment uploaded", task: updatedTask });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -185,7 +167,6 @@ exports.deleteAttachment = async (req, res) => {
 
     res.json({ message: "Attachment deleted successfully" });
   } catch (err) {
-    console.error("Delete Attachment Error:", err);
     res.status(500).json({ message: "Server error" });
   }
 };

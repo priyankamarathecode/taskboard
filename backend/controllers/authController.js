@@ -74,28 +74,19 @@ exports.resetPassword = async (req, res) => {
   const { token } = req.params;
   const { newPassword } = req.body;
 
-  console.log("🔐 Reset Password Triggered");
-  console.log("Received Token:", token);
-  console.log("New Password:", newPassword);
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("✅ Token Decoded:", decoded);
 
     const user = await User.findById(decoded.id);
     if (!user) {
-      console.log("❌ User not found for ID:", decoded.id);
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("👤 User Found:", user.email);
     user.password = newPassword; // Triggers pre-save bcrypt hook
     await user.save();
 
-    console.log("✅ Password updated successfully");
     res.json({ message: "Password reset successfully" });
   } catch (err) {
-    console.error("❌ Token Verification Error:", err.message);
     res.status(400).json({ message: "Invalid or expired token" });
   }
 };

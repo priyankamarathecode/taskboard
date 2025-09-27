@@ -23,16 +23,16 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// ✅ Route for assigning a task
+//  Route for assigning a task
 router.post("/assign", authMiddleware, assignTask);
 
-// ✅ Route for getting logged-in user's tasks
+// Route for getting logged-in user's tasks
 router.get("/my-tasks", authMiddleware, getMyTasks);
 
-// ✅ Route to update task
+// Route to update task
 // router.put("/:id", updateTask);
 
-// ✅ Route to delete task
+//  Route to delete task
 router.delete("/:taskId", deleteTask);
 
 router.put("/:id", authMiddleware, updateTask);

@@ -8,7 +8,6 @@ exports.getProfile = async (req, res) => {
 
     res.json(user);
   } catch (error) {
-    console.error("Get Profile Error:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -29,7 +28,6 @@ exports.updateProfile = async (req, res) => {
 
     res.json({ message: "Profile updated", user: updatedUser });
   } catch (error) {
-    console.error("Update Profile Error:", error);
     res.status(500).json({ message: "Server error" });
   }
 };

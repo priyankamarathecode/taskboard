@@ -10,7 +10,6 @@ mongoose
   .then(async () => {
     const existing = await User.findOne({ email: "admin@example.com" });
     if (existing) {
-      console.log("Admin already exists.");
       process.exit();
     }
 
@@ -23,10 +22,8 @@ mongoose
     });
 
     await user.save();
-    console.log("✅ Admin user created!");
     process.exit();
   })
   .catch((err) => {
-    console.error("❌ Error inserting admin:", err);
     process.exit(1);
   });

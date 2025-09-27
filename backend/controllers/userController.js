@@ -1,7 +1,4 @@
 const User = require("../models/User");
-
-// ✅ Create new user
-// ✅ Create new user
 const createUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -20,12 +17,10 @@ const createUser = async (req, res) => {
 
     res.status(201).json({ message: "User created successfully", user });
   } catch (err) {
-    console.error("User creation error:", err.message, err.errors); // ← ✅ Add this line
     res.status(500).json({ message: "Server Error", error: err.message });
   }
 };
 
-// ✅ Get all users (only with 'user' role)
 /* const getUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password");
@@ -39,14 +34,14 @@ const getUsers = async (req, res) => {
   try {
     const users = await User.find({ role: "user" })
       .select("-password")
-      .populate("tasks"); // ✅ important
+      .populate("tasks"); // important
     res.json(users);
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }
 };
 
-// ✅ Update user
+// Update user
 const updateUser = async (req, res) => {
   try {
     const { name, password, role } = req.body;
@@ -68,7 +63,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-// ✅ Delete user
+//  Delete user
 const deleteUser = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);

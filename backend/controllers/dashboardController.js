@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 exports.getAdminStats = async (req, res) => {
   try {
-    // ✅ Count only users with role = "user"
+    // Count only users with role = "user"
     const totalUsers = await User.countDocuments({ role: "user" });
 
     const totalTasks = await Task.countDocuments();
@@ -41,23 +41,21 @@ exports.getAdminStats = async (req, res) => {
       completionRate,
     });
   } catch (err) {
-    console.error("Admin Stats Error:", err.message);
     res.status(500).json({ message: "Failed to fetch admin stats" });
   }
 };
 
-// ✅ Get All Users
+// Get All Users
 exports.getUsers = async (req, res) => {
   try {
     const users = await User.find({ role: "user" }).select("name email role");
     res.json(users);
   } catch (err) {
-    console.error("Get Users Error:", err.message);
     res.status(500).json({ message: "Failed to fetch users" });
   }
 };
 
-// ✅ Get Pending Tasks
+//  Get Pending Tasks
 exports.getPendingTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ status: "Pending" })
@@ -69,7 +67,7 @@ exports.getPendingTasks = async (req, res) => {
   }
 };
 
-// ✅ Get Completed Tasks
+//  Get Completed Tasks
 exports.getCompletedTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ status: "Complete" })
@@ -81,7 +79,7 @@ exports.getCompletedTasks = async (req, res) => {
   }
 };
 
-// ✅ Get In-Progress Tasks
+//  Get In-Progress Tasks
 exports.getInProgressTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ status: "In Progress" })
@@ -93,7 +91,7 @@ exports.getInProgressTasks = async (req, res) => {
   }
 };
 
-// ✅ Task Distribution (Pie Chart)
+//  Task Distribution (Pie Chart)
 exports.getTaskDistribution = async (req, res) => {
   try {
     const distribution = await Task.aggregate([
@@ -105,7 +103,7 @@ exports.getTaskDistribution = async (req, res) => {
   }
 };
 
-// ✅ Top Performers (Bar Chart)
+// Top Performers (Bar Chart)
 exports.getTopPerformers = async (req, res) => {
   try {
     const performers = await Task.aggregate([
